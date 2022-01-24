@@ -19,16 +19,18 @@ class Action
     #[ORM\Column(type: 'string', length: 255)]
     private $label;
 
-    #[ORM\ManyToMany(targetEntity: IngredientType::class, inversedBy: 'actions')]
-    private $allowed_types;
+
 
     #[ORM\OneToMany(mappedBy: 'etape_action', targetEntity: Etape::class, orphanRemoval: true)]
     private $etapes;
 
+    #[ORM\ManyToMany(targetEntity: Ingredient::class, mappedBy: 'allowed_actions')]
+    private $ingredients;
+
     public function __construct()
     {
-        $this->allowed_types = new ArrayCollection();
         $this->etapes = new ArrayCollection();
+        $this->ingredients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -48,29 +50,7 @@ class Action
         return $this;
     }
 
-    /**
-     * @return Collection|IngredientType[]
-     */
-    public function getAllowedTypes(): Collection
-    {
-        return $this->allowed_types;
-    }
 
-    public function addAllowedType(IngredientType $allowedType): self
-    {
-        if (!$this->allowed_types->contains($allowedType)) {
-            $this->allowed_types[] = $allowedType;
-        }
-
-        return $this;
-    }
-
-    public function removeAllowedType(IngredientType $allowedType): self
-    {
-        $this->allowed_types->removeElement($allowedType);
-
-        return $this;
-    }
 
     /**
      * @return Collection|Etape[]
@@ -101,4 +81,32 @@ class Action
 
         return $this;
     }
+
+    /**
+     * @return Collection|Ingredient[]
+     */
+    public function getIngredients(): Collection
+    {
+        return $this->ingredients;
+    }
+
+    public function addIngredient(Ingredient $ingredient): self
+    {
+        if (!$this->ingredients->contains($ingredient)) {
+            $this->ingredients[] = $ingredient;
+            $ingredient->addAllowedAction($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIngredient(Ingredient $ingredient): self
+    {
+        if ($this->ingredients->removeElement($ingredient)) {
+            $ingredient->removeAllowedAction($this);
+        }
+
+        return $this;
+    }
 }
+

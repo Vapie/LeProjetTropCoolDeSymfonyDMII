@@ -18,16 +18,23 @@ class Ingredient
     #[ORM\Column(type: 'string', length: 255)]
     private $nom;
 
-    #[ORM\ManyToMany(targetEntity: IngredientType::class, inversedBy: 'ingredients')]
-    private $Types;
 
     #[ORM\ManyToMany(targetEntity: Etape::class, mappedBy: 'ingredients')]
     private $etapes;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $article;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $mesure;
+
+    #[ORM\ManyToMany(targetEntity: Action::class, inversedBy: 'ingredients')]
+    private $allowed_actions;
+
     public function __construct()
     {
-        $this->Types = new ArrayCollection();
         $this->etapes = new ArrayCollection();
+        $this->allowed_actions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -47,29 +54,11 @@ class Ingredient
         return $this;
     }
 
-    /**
-     * @return Collection|IngredientType[]
-     */
-    public function getTypes(): Collection
-    {
-        return $this->Types;
-    }
 
-    public function addType(IngredientType $type): self
-    {
-        if (!$this->Types->contains($type)) {
-            $this->Types[] = $type;
-        }
 
-        return $this;
-    }
 
-    public function removeType(IngredientType $type): self
-    {
-        $this->Types->removeElement($type);
 
-        return $this;
-    }
+
 
     /**
      * @return Collection|Etape[]
@@ -94,6 +83,54 @@ class Ingredient
         if ($this->etapes->removeElement($etape)) {
             $etape->removeIngredient($this);
         }
+
+        return $this;
+    }
+
+    public function getArticle(): ?string
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?string $article): self
+    {
+        $this->article = $article;
+
+        return $this;
+    }
+
+    public function getMesure(): ?string
+    {
+        return $this->mesure;
+    }
+
+    public function setMesure(string $mesure): self
+    {
+        $this->mesure = $mesure;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Action[]
+     */
+    public function getAllowedActions(): Collection
+    {
+        return $this->allowed_actions;
+    }
+
+    public function addAllowedAction(Action $allowedAction): self
+    {
+        if (!$this->allowed_actions->contains($allowedAction)) {
+            $this->allowed_actions[] = $allowedAction;
+        }
+
+        return $this;
+    }
+
+    public function removeAllowedAction(Action $allowedAction): self
+    {
+        $this->allowed_actions->removeElement($allowedAction);
 
         return $this;
     }
