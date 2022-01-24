@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RecetteController!{% endblock %}
+
+{% block body %}
+    {% for ingredient in ingredients %}
+        <p>{{ ingredient.nom }}</p>
+    {% endfor %}
+{% endblock %}
