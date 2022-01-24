@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/Julien/vendor/friendsofphp/proxy-manager-lts" />
+      <path value="$PROJECT_DIR$/Julien/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/Julien/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/Julien/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/Julien/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/cache" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/cache-contracts" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/config" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/dependency-injection" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/doctrine-migrations-bundle" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/dotenv" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/migrations" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/flex" />
+      <path value="$PROJECT_DIR$/Julien/vendor/doctrine/sql-formatter" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/framework-bundle" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/runtime" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/twig-bundle" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/var-exporter" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/proxy-manager-bridge" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/twig-bridge" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/doctrine-bridge" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/Julien/vendor/laminas/laminas-code" />
+      <path value="$PROJECT_DIR$/Julien/vendor/symfony/stopwatch" />
+      <path value="$PROJECT_DIR$/Julien/vendor/twig/extra-bundle" />
+      <path value="$PROJECT_DIR$/Julien/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/Julien/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.0">
+    <option name="suggestChangeDefaultLanguageLevel" value="false" />
+  </component>
+</project>
