@@ -102,6 +102,9 @@
     "laminas/laminas-code": {
         "version": "4.5.1"
     },
+    "league/commonmark": {
+        "version": "0.5.1"
+    },
     "nelmio/cors-bundle": {
         "version": "2.2",
         "recipe": {
@@ -210,6 +213,9 @@
             "./.env"
         ]
     },
+    "symfony/form": {
+        "version": "v6.0.2"
+    },
     "symfony/framework-bundle": {
         "version": "6.0",
         "recipe": {
@@ -244,10 +250,16 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/options-resolver": {
+        "version": "v6.0.0"
+    },
     "symfony/password-hasher": {
         "version": "v6.0.2"
     },
     "symfony/polyfill-intl-grapheme": {
+        "version": "v1.24.0"
+    },
+    "symfony/polyfill-intl-icu": {
         "version": "v1.24.0"
     },
     "symfony/polyfill-intl-normalizer": {
@@ -363,6 +375,9 @@
     },
     "twig/extra-bundle": {
         "version": "v3.3.7"
+    },
+    "twig/markdown-extra": {
+        "version": "v3.3.5"
     },
     "twig/twig": {
         "version": "v3.3.7"
