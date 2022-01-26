@@ -36,6 +36,14 @@ class Ingredient
         $this->etapes = new ArrayCollection();
         $this->allowed_actions = new ArrayCollection();
     }
+    public static function creation(string $nom,string $article,string $mesure):Ingredient
+    {
+        $ingredient = new Ingredient();
+        $ingredient->setNom($nom);
+        $ingredient->setArticle($article);
+        $ingredient->setMesure($mesure);
+        return $ingredient;
+    }
 
     public function getId(): ?int
     {

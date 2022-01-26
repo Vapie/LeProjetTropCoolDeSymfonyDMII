@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}On va envoyer un mail{% endblock %}
+
+{% block body %}
+clique là mon reuf
+    {{ form_start(form) }}
+
+
+
+
+
+        {{ form_row(form.text) }}
+
+        {{ form_row(form.save) }}
+
+    {{ form_end(form) }}
+{% endblock %}
