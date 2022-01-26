@@ -5,5 +5,7 @@
 {% block body %}
     {% for ingredient in ingredients %}
         <p>{{ ingredient.nom }}</p>
+
     {% endfor %}
+    {{ form(form) }}
 {% endblock %}

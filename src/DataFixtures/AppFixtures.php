@@ -10,6 +10,19 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        // Actions
+        $manager->persist(Action::creation("découpez !ingredients!"));
+        $manager->persist(Action::creation("faites cuire !ingredients! à feu doux pendant !temps!"));
+        $manager->persist(Action::creation("tournez sur vous même puis regardez fixement !ingredients!"));
+        $manager->persist(Action::creation("lavez !ingredients! et levez les fillets"));
+        $manager->persist(Action::creation("mettez !ingredients! dans une passoire"));
+        $manager->persist(Action::creation("coupez !ingredients! en petits dés"));
+        $manager->persist(Action::creation("vérifiez si !ingredients! est commestible"));
+        $manager->persist(Action::creation("mettez !ingredients! dans une passoire"));
+
+        $manager->flush();
+
+        //Ingredients
 
         $manager->persist(Ingredient::creation("gravier","le","berzingue"));
         $manager->persist(Ingredient::creation("tomate","la","unité"));
@@ -20,7 +33,8 @@ class AppFixtures extends Fixture
         $manager->persist(Ingredient::creation("maximator 11,6%","la","canette"));
         $manager->persist(Ingredient::creation("farine","la","grammes"));
         $manager->persist(Ingredient::creation("bonnet","le","unité"));
-
         $manager->flush();
+
+
     }
 }

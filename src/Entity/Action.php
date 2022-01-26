@@ -108,5 +108,14 @@ class Action
 
         return $this;
     }
+    public function __toString():string{
+        return $this->getLabel();
+    }
+    public static function creation(string $label):Etape
+    {
+        $action = new Action();
+        $action->setLabel($label);
+        return $action;
+    }
 }
 
