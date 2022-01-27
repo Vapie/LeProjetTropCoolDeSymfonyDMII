@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ActionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ActionRepository::class)]
@@ -111,11 +112,12 @@ class Action
     public function __toString():string{
         return $this->getLabel();
     }
-    public static function creation(string $label):Etape
+    public static function creation(string $label):Action
     {
         $action = new Action();
         $action->setLabel($label);
         return $action;
     }
+
 }
 

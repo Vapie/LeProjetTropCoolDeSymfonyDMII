@@ -36,13 +36,16 @@ class Ingredient
         $this->etapes = new ArrayCollection();
         $this->allowed_actions = new ArrayCollection();
     }
-    public static function creation(string $nom,string $article,string $mesure ,):Ingredient
+    public static function creation(string $nom,string $article,string $mesure ,$allowedActions ):Ingredient
     {
         $ingredient = new self();
         $ingredient
             ->setNom($nom)
             ->setArticle($article)
             ->setMesure($mesure);
+        foreach ($allowedActions as $value) {
+           $ingredient->addAllowedAction($value);
+        }
         return $ingredient;
     }
 

@@ -2,8 +2,11 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Action;
 use App\Entity\Ingredient;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
@@ -23,18 +26,32 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         //Ingredients
-
-        $manager->persist(Ingredient::creation("gravier","le","berzingue"));
-        $manager->persist(Ingredient::creation("tomate","la","unité"));
-        $manager->persist(Ingredient::creation("oeuf","le","unité"));
-        $manager->persist(Ingredient::creation("lait","du","litre"));
-        $manager->persist(Ingredient::creation("poivre","du","pincée"));
-        $manager->persist(Ingredient::creation("sel","le","pincée"));
-        $manager->persist(Ingredient::creation("maximator 11,6%","la","canette"));
-        $manager->persist(Ingredient::creation("farine","la","grammes"));
-        $manager->persist(Ingredient::creation("bonnet","le","unité"));
+        $manager->persist(Ingredient::creation("gravier","le","berzingue", $this->getRandomActionList($manager)));
+        $manager->persist(Ingredient::creation("larme de sardoche","la","litre",$this->getRandomActionList($manager)));
+        $manager->persist(Ingredient::creation("tomate","la","unité",$this->getRandomActionList($manager)));
+        $manager->persist(Ingredient::creation("oeuf","le","unité",$this->getRandomActionList($manager)));
+        $manager->persist(Ingredient::creation("lait","du","litre",$this->getRandomActionList($manager)));
+        $manager->persist(Ingredient::creation("poivre","du","pincée",$this->getRandomActionList($manager)));
+        $manager->persist(Ingredient::creation("sel","le","pincée",$this->getRandomActionList($manager)));
+        $manager->persist(Ingredient::creation("maximator 11,6%","la","canette",$this->getRandomActionList($manager)));
+        $manager->persist(Ingredient::creation("farine","la","grammes",$this->getRandomActionList($manager)));
+        $manager->persist(Ingredient::creation("bonnet","le","unité",$this->getRandomActionList($manager)));
+        $manager->persist(Ingredient::creation("battlebus","le","unité",$this->getRandomActionList($manager)));
         $manager->flush();
 
+    }
 
+    /**
+     * @return Action[]
+     */
+    public function getRandomActionList($manager){
+        $actions = $manager->getRepository(Action::class)->findAll();
+        $rand = rand(2,6);
+        $selected_actions_index = array_rand($actions,$rand);
+        $selected_actions = [];
+        for ($i = 0; $i < $rand ;$i++) {
+            array_push($selected_actions,$actions[$selected_actions_index[$i]]);
+        }
+        return $selected_actions;
     }
 }
