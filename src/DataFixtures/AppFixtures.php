@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Action;
 use App\Entity\Ingredient;
+use App\Entity\TitreTemplate;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,6 +40,13 @@ class AppFixtures extends Fixture
         $manager->persist(Ingredient::creation("battlebus","le","unité",$this->getRandomActionList($manager)));
         $manager->flush();
 
+        //Title Template
+
+        $manager->persist(TitreTemplate::creation("!ingredient! très cher accompagné de !ingredient!"));
+        $manager->persist(TitreTemplate::creation("!ingredient! sur sont lit !ingredient!"));
+        $manager->persist(TitreTemplate::creation("!ingredient! délicatement cuit avec sa sauce !ingredient!"));
+
+        $manager->flush();
     }
 
     /**

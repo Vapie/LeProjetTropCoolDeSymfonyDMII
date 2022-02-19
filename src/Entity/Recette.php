@@ -18,7 +18,7 @@ class Recette
     #[ORM\Column(type: 'string', length: 255)]
     private $titre;
 
-    #[ORM\OneToMany(mappedBy: 'recette', targetEntity: Etape::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'recette', targetEntity: Etape::class, orphanRemoval: true, cascade: ['persist'] )]
     private $etapes;
 
     public function __construct()

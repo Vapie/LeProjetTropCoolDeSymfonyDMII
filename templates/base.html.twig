@@ -7,15 +7,23 @@
 </head>
 <body>
 <header>
-    Bienvenue sur Julien2Legume !
+    <div id="logo">
+        🥕
+    </div>
+    <div>
+        Bienvenue sur Julien2Legume !
+    </div>
+
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <p>Email: {{ app.user.email }}</p>
+        <div id="curent_account"> <p>Email: {{ app.user.email }}</p> <p><a href="/logout" id="logoutButton">Logout</a></p></div>
+    {% else %}
+        <div id="loginButton"><a href="/register">Register</a></div> <div id="loginButton"><a href="/login">Login</a></div>
     {% endif %}
 </header>
 {% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
-<footer>yolefooter
+<footer>Cet espace publicitaire a été sponsorisé par le gang anti-footer
 {#exercice 5 twig#}
 {#    {% set content %}#}
 {#        # Hello world#}
@@ -27,4 +35,148 @@
 
 
 </footer>
+<style>
+    header {
+        width: 100%;
+        background-color: #26b72b;
+        color:#1d1d1d;
+        font-family: "Calibri";
+        font-weight: bolder;
+        font-size: 45px ;
+        text-underline: white;
+    }
+    header>div{
+        display:inline-block;
+    }
+    #logo{
+        margin-left: 15px;
+        margin-top: 5px;
+        font-size: 45px;
+    }
+    #loginButton{
+        float: right;
+        font-size: 28px;
+        padding: 4px;
+        height: 100%;
+        margin-top:10px;
+        margin-right: 10px;
+        vertical-align: center;
+        border-radius: 12px;
+        background-color: #DDDDDD;
+    }
+    #curent_account{
+        float: right;
+        height: 100%;
+        padding-top:10px;
+        padding-right: 10px;
+        vertical-align: center;
+        font-size: 17px;
+
+    }
+    #logoutButton{
+        border-radius: 12px;
+        background-color: #DDDDDD;
+        padding: 4px;
+        margin-bottom: 4px;
+    }
+    body{
+        background-color: #DDDDDD;
+    }
+
+    form{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background: rgba(0,0,0,.1);
+        padding: 100px;
+    }
+    form>div{
+      margin-bottom: 10px;
+    }
+
+    label{
+        font-family: sans-serif;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        font-size: .8em;
+        color: #FFF;
+    }
+
+    input[type=text]{
+        display: inline-block;
+        border: none;
+        text-align: left;
+        box-shadow: 3px 2px #26b72b;
+        padding: 10px;
+        width: 350px;
+        margin: 10px 0;
+        background: #1d1d1d;
+        color: #FFF;
+    }
+
+    input[type=password]{
+        display: inline-block;
+        border: none;
+        text-align: left;
+        box-shadow: 3px 2px #26b72b;
+        padding: 10px;
+        width: 350px;
+        margin: 10px 0;
+        background: #1d1d1d;
+        color: #FFF;
+    }
+    input[type=email]{
+        display: inline-block;
+        border: none;
+        text-align: left;
+        box-shadow: 3px 2px #26b72b;
+        padding: 10px;
+        width: 350px;
+        margin: 10px 0;
+        background: #1d1d1d;
+        color: #FFF;
+    }
+
+    input[type=email]:focus{
+        background: none;
+        border: none;
+        color: #FFF;
+    }
+    input[type=text]:focus{
+        background: none;
+        border: none;
+        color: #FFF;
+    }
+    input[type=password]:focus{
+        background: none;
+        border: none;
+        color: #FFF;
+    }
+
+    button{
+        background: transparent;
+        color: #FFF;
+        font-family: sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin: 20px 0;
+        padding: 10px 30px;
+        border: 2px solid #FFF;
+    }
+
+    button:hover{
+        background: transparent;
+        border: 2px solid #26b72b;
+    }
+    footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #26b72b;
+        color: white;
+        text-align: center;
+    }
+</style>
 </html>

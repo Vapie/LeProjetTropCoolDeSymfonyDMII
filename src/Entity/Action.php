@@ -28,10 +28,14 @@ class Action
     #[ORM\ManyToMany(targetEntity: Ingredient::class, mappedBy: 'allowed_actions')]
     private $ingredients;
 
+    #[ORM\OneToMany(mappedBy: 'actions', targetEntity: Etape::class, orphanRemoval: true)]
+    private $etapes_;
+
     public function __construct()
     {
         $this->etapes = new ArrayCollection();
         $this->ingredients = new ArrayCollection();
+        $this->etapes_ = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -117,6 +121,28 @@ class Action
         $action = new Action();
         $action->setLabel($label);
         return $action;
+    }
+
+    public function addEtapes(Etape $etapes): self
+    {
+        if (!$this->etapes_->contains($etapes)) {
+            $this->etapes_[] = $etapes;
+            $etapes->setActions($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEtapes(Etape $etapes): self
+    {
+        if ($this->etapes_->removeElement($etapes)) {
+            // set the owning side to null (unless already changed)
+            if ($etapes->getActions() === $this) {
+                $etapes->setActions(null);
+            }
+        }
+
+        return $this;
     }
 
 }

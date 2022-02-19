@@ -29,6 +29,7 @@ class Etape
     #[ORM\JoinColumn(nullable: false)]
     private $recette;
 
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
@@ -97,6 +98,36 @@ class Etape
         $this->recette = $recette;
 
         return $this;
+    }
+
+    public function getAction(): ?Action
+    {
+        return $this->etape_action;
+    }
+
+    public function setAction(?Action $actions): self
+    {
+        $this->etape_action= $actions;
+
+        return $this;
+    }
+    public function getCompletedString(): string
+    {
+        $temp_text = $this->getAction()->getLabel();
+        $is_text_processed = true;
+        while($is_text_processed) {
+            $pos = strpos($temp_text, "!ingredients!");
+            /** @var Ingredient $random_ingredient */
+            $random_ingredient = $this->ingredients[0];
+
+            if ($pos !== false) {
+                $temp_text = substr_replace($temp_text, $random_ingredient->getArticle()." ".$random_ingredient->getNom(), $pos, strlen("!ingredients!"));
+            } else {
+                $is_text_processed = false;
+            }
+        }
+        return $temp_text;
+
     }
 
 }

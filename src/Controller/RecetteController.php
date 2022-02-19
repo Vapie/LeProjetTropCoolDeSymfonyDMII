@@ -2,10 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Action;
+use App\Entity\Etape;
 use App\Entity\Ingredient;
 
+use App\Entity\Recette;
+use App\Entity\TitreTemplate;
 use Doctrine\ORM\EntityManagerInterface;
 
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,10 +22,21 @@ use Symfony\Component\HttpFoundation\Request;
 class RecetteController extends AbstractController
 {
     #[Route('/', name: 'recettes')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
         return $this->render('recette/index.html.twig', [
             'controller_name' => 'RecetteController',
+            'recettes'=> $entityManager->getRepository(Recette::class)->findAll()
+        ]);
+    }
+    #[Route('/recette/{id}', name: 'recette')]
+    public function getrecette(EntityManagerInterface $entityManager,int $id): Response
+    {
+        $recette = $entityManager->getRepository(Recette::class)->find($id);
+       // dd($recette);
+        return $this->render('recette/detail.html.twig', [
+            'controller_name' => 'RecetteController',
+            'recette'=>$recette
         ]);
     }
 
@@ -28,17 +44,41 @@ class RecetteController extends AbstractController
     public function generate(EntityManagerInterface $entityManager ): Response
     {
         $ingredients = $entityManager->getRepository(Ingredient::class)->findAll();
-        $rand = rand(2,4);
+        $rand = rand(3,5);
         $selected_ingredients_index = array_rand($ingredients,$rand);
         $selected_ingredients = [];
+        $templates_title = $entityManager->getRepository(TitreTemplate::class)->findAll();
+        /** @var TitreTemplate $titre */
+        $titre = $templates_title[rand(0,count($templates_title)-1)];
         for ($i = 0; $i < $rand ;$i++) {
-            array_push($selected_ingredients,$ingredients[$selected_ingredients_index[$i]]);
+            array_push($selected_ingredients, $ingredients[$selected_ingredients_index[$i]]);
         }
+        //        etapes
+        $rand_etapes  = rand(3,5);
+
+        $recette = new Recette();
+        $recette->setTitre($titre->getCompletedString($selected_ingredients));
+        for ($i = 0; $i < $rand_etapes ;$i++) {
+            /** @var Ingredient $rand_ingred */
+            $rand_ingred  = $selected_ingredients[rand(0,$rand-1)];
+            $actions = $rand_ingred->getAllowedActions();
+            /** @var Action $selected_action */
+            $selected_action = $actions[rand(0,count($actions)-1)];
+            $current_etape = new Etape();
+            $current_etape->addIngredient($rand_ingred)->setEtapeAction($selected_action)->setEtapeIndex($i)->setRecette($recette);
+            $recette->addEtape($current_etape);
+
+
+        }
+        $entityManager->persist($recette);
+        $entityManager->flush();
+
 
         return $this->render('recette/random.html.twig', [
-            'controller_name' => 'RecetteController',"ingredients"=>$selected_ingredients
-        ]);
+            'controller_name' => 'RecetteController',
+            "recette"=>$recette,
 
+        ]);
     }
 
     /**
