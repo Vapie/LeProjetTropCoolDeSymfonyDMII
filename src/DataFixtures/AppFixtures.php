@@ -43,7 +43,9 @@ class AppFixtures extends Fixture
         //Title Template
 
         $manager->persist(TitreTemplate::creation("!ingredient! très cher accompagné de !ingredient!"));
-        $manager->persist(TitreTemplate::creation("!ingredient! sur sont lit !ingredient!"));
+        $manager->persist(TitreTemplate::creation("!ingredient! sur son lit !ingredient!"));
+        $manager->persist(TitreTemplate::creation("!ingredient! assaisoné avec !ingredient!"));
+        $manager->persist(TitreTemplate::creation("!ingredient! revenue à la poêle avec un filet d'huile d'olive et un peu de  !ingredient!"));
         $manager->persist(TitreTemplate::creation("!ingredient! délicatement cuit avec sa sauce !ingredient!"));
 
         $manager->flush();

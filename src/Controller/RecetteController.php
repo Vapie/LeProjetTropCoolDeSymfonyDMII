@@ -8,6 +8,8 @@ use App\Entity\Ingredient;
 
 use App\Entity\Recette;
 use App\Entity\TitreTemplate;
+use App\Entity\User;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 use Doctrine\Persistence\ObjectManager;
@@ -40,41 +42,70 @@ class RecetteController extends AbstractController
         ]);
     }
 
+    #[Route('/unfav/{id}', name: 'recetteunfav')]
+    public function unfavr(EntityManagerInterface $entityManager,int $id): Response
+    {
+
+        /** @var Recette $recette */
+        $recette = $entityManager->getRepository(Recette::class)->find($id);
+        /** @var User $user */
+        $user = $this->getUser();
+        if ($user != null){
+            $user->removeFavori($recette);
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+        return $this->render('recette/detail.html.twig', [
+            'controller_name' => 'RecetteController',
+            'recette'=>$recette
+        ]);
+    }
+
+    #[Route('/fav/{id}', name: 'recettefav')]
+    public function favr(EntityManagerInterface $entityManager,int $id): Response
+    {
+        /** @var Recette $recette */
+        $recette = $entityManager->getRepository(Recette::class)->find($id);
+        // dd($recette);
+        /** @var User $user */
+        $user = $this->getUser();
+        if ($user != null){
+            $user->addFavori($recette);
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+
+        return $this->render('recette/detail.html.twig', [
+            'controller_name' => 'RecetteController',
+            'recette' => $recette
+        ]);
+    }
+
+    #[Route('/favoris', name: 'recette')]
+    public function fav(EntityManagerInterface $entityManager): Response
+    {
+
+        /** @var User $user */
+        $user = $this->getUser();
+        if ($user != null){
+            return $this->render('recette/favoris.html.twig', [
+                'controller_name' => 'RecetteController',
+                'recettes'=>$user->getFavoris()
+            ]);
+        }
+        return $this->render('recette/favoris.html.twig', [
+            'controller_name' => 'RecetteController'
+        ]);
+        // dd($recette);
+
+    }
+
     #[Route('/rand', name: 'generate_recette')]
     public function generate(EntityManagerInterface $entityManager ): Response
     {
-        $ingredients = $entityManager->getRepository(Ingredient::class)->findAll();
-        $rand = rand(3,5);
-        $selected_ingredients_index = array_rand($ingredients,$rand);
-        $selected_ingredients = [];
-        $templates_title = $entityManager->getRepository(TitreTemplate::class)->findAll();
-        /** @var TitreTemplate $titre */
-        $titre = $templates_title[rand(0,count($templates_title)-1)];
-        for ($i = 0; $i < $rand ;$i++) {
-            array_push($selected_ingredients, $ingredients[$selected_ingredients_index[$i]]);
-        }
-        //        etapes
-        $rand_etapes  = rand(3,5);
+        $recette =  Recette::createRandRecette($entityManager);
 
-        $recette = new Recette();
-        $recette->setTitre($titre->getCompletedString($selected_ingredients));
-        for ($i = 0; $i < $rand_etapes ;$i++) {
-            /** @var Ingredient $rand_ingred */
-            $rand_ingred  = $selected_ingredients[rand(0,$rand-1)];
-            $actions = $rand_ingred->getAllowedActions();
-            /** @var Action $selected_action */
-            $selected_action = $actions[rand(0,count($actions)-1)];
-            $current_etape = new Etape();
-            $current_etape->addIngredient($rand_ingred)->setEtapeAction($selected_action)->setEtapeIndex($i)->setRecette($recette);
-            $recette->addEtape($current_etape);
-
-
-        }
-        $entityManager->persist($recette);
-        $entityManager->flush();
-
-
-        return $this->render('recette/random.html.twig', [
+        return $this->render('recette/detail.html.twig', [
             'controller_name' => 'RecetteController',
             "recette"=>$recette,
 

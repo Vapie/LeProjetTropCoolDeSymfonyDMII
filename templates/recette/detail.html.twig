@@ -3,8 +3,40 @@
 {% block title %}Hello RecetteController!{% endblock %}
 
 {% block body %}
-    {{ recette.titre }}
-    {% for etape in recette.etapes %}
-        <p>{{ etape.getCompletedString }}</p>
-    {% endfor %}
+    <div id="content">
+        <h1 id="titre">
+            {{ recette.titre }}
+        </h1>
+        <div id="etapes_container">
+            {% for etape in recette.etapes %}
+               <div class="etape_container">
+                   <p class="index">etape {{ etape.id }}    </p><p>   <em>  </em> {{ etape.getCompletedString }}</p>
+               </div>
+            {% endfor %}
+        </div>
+
+
+
+    </div>
+
+    <style>
+        #etapes_container{
+            display: inline-flex;
+            flex-flow: column;
+        }
+        .etape_container{
+            display: flex;
+        }
+        #content{
+            padding:40px ;
+        }
+        #titre{
+            font-weight: bolder;
+            font-size: 45px;
+        }
+        .index{
+            font-weight: bold;
+            padding-right: 20px;
+        }
+    </style>
 {% endblock %}

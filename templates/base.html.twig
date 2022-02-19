@@ -13,6 +13,14 @@
     <div>
         Bienvenue sur Julien2Legume !
     </div>
+    <div id="menu">
+        <div>
+            <a href="/">Toutes les recettes</a>
+        </div>
+        <div>
+            <a href="/favoris">Mes favoris</a>
+        </div>
+    </div>
 
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <div id="curent_account"> <p>Email: {{ app.user.email }}</p> <p><a href="/logout" id="logoutButton">Logout</a></p></div>
@@ -23,19 +31,16 @@
 {% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
-<footer>Cet espace publicitaire a été sponsorisé par le gang anti-footer
-{#exercice 5 twig#}
-{#    {% set content %}#}
-{#        # Hello world#}
-{#        - point 1#}
-{#        - point 2#}
-{#    {% endset %}#}
-{#    {{ content | markdown_to_html | raw  }}#}
-
-
-
-</footer>
+<footer>Cet espace publicitaire a été sponsorisé par le gang anti-footer</footer>
 <style>
+    #menu{
+        font-size: 18px ;
+        padding-left: 5px;
+        border-left: #1d1d1d 1px solid;
+    }
+    #menu>div{
+        display: block;
+    }
     header {
         width: 100%;
         background-color: #26b72b;

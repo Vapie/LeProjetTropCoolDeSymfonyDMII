@@ -3,49 +3,43 @@
 {% block title %}Hello RecetteController!{% endblock %}
 
 {% block body %}
-    <div id="content">
-        <div class="tbl-header">
-            <table cellpadding="0" cellspacing="0" border="0">
-                <thead>
-                <tr>
-                    <th>Numéro</th>
-                    <th>Titre</th>
-                    <th>Detail</th>
-                    <th>Favoris</th>
-                </tr>
-                </thead>
-            </table>
-        </div>
-        <div class="tbl-content">
-            <table cellpadding="0" cellspacing="0" border="0">
-                <tbody>
-                {% for recette in recettes %}
-
-
+    <h1>Mes Favoris</h1>
+    {% if  is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div id="content">
+            <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <thead>
                     <tr>
-                        <td>{{ recette.id }}</td>
-                        <td>{{ recette.titre }}</td>
-                        <td><a href="/recette/{{ recette.id }}">Detail</a></td>
-                        <td>
-
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                {% if  recette in app.user.favoris %}
-                                    <a href="/unfav/{{ recette.id }}">Retirer des favoris</a>
-                                {% else  %}
-                                    <a href="/fav/{{ recette.id }}">Ajouter aux favoris</a>
-                                {% endif %}
-                            {% else  %}
-                                Pour ajouter des favoris,logez vous
-                            {% endif %}
-
-                            </td>
+                        <th>Numéro</th>
+                        <th>Titre</th>
+                        <th>Detail</th>
+                        <th>Favoris</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                    {% for recette in recettes %}
 
-    </div>
+
+                        <tr>
+                            <td>{{ recette.id }}</td>
+                            <td>{{ recette.titre }}</td>
+                            <td><a href="/recette/{{ recette.id }}"></a></td>
+                            <td><a href="/recette/{{ recette.id }}"></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    {% else  %}
+        <h1>Connectez vous pour voir vos favoris</h1>
+    {% endif %}
+
 
     <script type="text/javascript">
         function redirect( id )
