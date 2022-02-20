@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Action;
 use App\Entity\Ingredient;
+use App\Entity\Recette;
 use App\Entity\TitreTemplate;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Collections\Collection;
@@ -22,11 +23,15 @@ class AppFixtures extends Fixture
         $manager->persist(Action::creation("mettez !ingredients! dans une passoire"));
         $manager->persist(Action::creation("coupez !ingredients! en petits dés"));
         $manager->persist(Action::creation("vérifiez si !ingredients! est commestible"));
-        $manager->persist(Action::creation("mettez !ingredients! dans une passoire"));
-
+        $manager->persist(Action::creation("mettez !ingredients! dans une casserole puis allumez le feu"));
+        $manager->persist(Action::creation("utilisez un cul de poule pour mélanger !ingredients! "));
+        $manager->persist(Action::creation("mettez !ingredients! dans une casserole puis allumez le feu"));
         $manager->flush();
 
         //Ingredients
+        $manager->persist(Ingredient::creation("gravier","le","berzingue", $this->getRandomActionList($manager)));
+        $manager->persist(Ingredient::creation("fromage","le","gramme", $this->getRandomActionList($manager)));
+        $manager->persist(Ingredient::creation("","le","berzingue", $this->getRandomActionList($manager)));
         $manager->persist(Ingredient::creation("gravier","le","berzingue", $this->getRandomActionList($manager)));
         $manager->persist(Ingredient::creation("larme de sardoche","la","litre",$this->getRandomActionList($manager)));
         $manager->persist(Ingredient::creation("tomate","la","unité",$this->getRandomActionList($manager)));
@@ -49,6 +54,26 @@ class AppFixtures extends Fixture
         $manager->persist(TitreTemplate::creation("!ingredient! délicatement cuit avec sa sauce !ingredient!"));
 
         $manager->flush();
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
+        Recette::createRandRecette($manager);
     }
 
     /**
