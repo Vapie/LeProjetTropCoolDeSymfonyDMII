@@ -18,5 +18,14 @@ Voici les étapes à réaliser pour l'install
 
 
 
+Voici l'auto évaluation symfony 
+Auto évaluation Symfony: 4/5
+Je dirais que 4/5 se justifie par le fait que je sais aller chercher les informations qu'il me manque dans la doc, et je sais mettre en place ce que je trouve en comprenant la majorité de ce que je fait / et / ou copie.
+
+je n'ai pas mis 5 ( même si j'aurais aimé ) car certains points de symfony restent flou pour moi ( particulièremen,t le fonctionnement interne ) et parceque je nomme mes commits n'importe comment 
+
+Voilà !
+
+
 
 
