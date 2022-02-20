@@ -27,8 +27,20 @@
                         <tr>
                             <td>{{ recette.id }}</td>
                             <td>{{ recette.titre }}</td>
-                            <td><a href="/recette/{{ recette.id }}"></a></td>
-                            <td><a href="/recette/{{ recette.id }}"></a></td>
+                            <td><a href="/recette/{{ recette.id }}">Detail</a></td>
+                            <td>
+
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    {% if  recette in app.user.favoris %}
+                                        <a href="/unfav/{{ recette.id }}">Retirer des favoris</a>
+                                    {% else  %}
+                                        <a href="/fav/{{ recette.id }}">Ajouter aux favoris</a>
+                                    {% endif %}
+                                {% else  %}
+                                    Pour ajouter des favoris,logez vous
+                                {% endif %}
+
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

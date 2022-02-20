@@ -91,14 +91,15 @@ class Recette
 
         $recette = new Recette();
         $recette->setTitre($titre->getCompletedString($selected_ingredients));
-        for ($i = 0; $i < $rand_etapes ;$i++) {
+        for ($index = 0; $index < $rand_etapes ;$index++) {
             /** @var Ingredient $rand_ingred */
             $rand_ingred  = $selected_ingredients[rand(0,$rand-1)];
             $actions = $rand_ingred->getAllowedActions();
             /** @var Action $selected_action */
             $selected_action = $actions[rand(0,count($actions)-1)];
             $current_etape = new Etape();
-            $current_etape->addIngredient($rand_ingred)->setEtapeAction($selected_action)->setEtapeIndex($i)->setRecette($recette);
+            $current_etape->addIngredient($rand_ingred)->setEtapeAction($selected_action)->setEtapeIndex($index)->setRecette($recette);
+
             $recette->addEtape($current_etape);
 
 

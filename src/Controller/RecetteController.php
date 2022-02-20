@@ -23,6 +23,22 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 class RecetteController extends AbstractController
 {
+
+
+
+
+    #[Route('/recette/{id}', name: 'recedtte')]
+    public function detail(EntityManagerInterface $entityManager,int $id): Response
+    {
+        $recette = $entityManager->getRepository(Recette::class)->find($id);
+
+        return $this->render('recette/detail.html.twig', [
+            'controller_name' => 'RecetteController',
+            'recette'=>$recette
+        ]);
+    }
+
+
     #[Route('/', name: 'recettes')]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -31,16 +47,7 @@ class RecetteController extends AbstractController
             'recettes'=> $entityManager->getRepository(Recette::class)->findAll()
         ]);
     }
-    #[Route('/recette/{id}', name: 'recette')]
-    public function getrecette(EntityManagerInterface $entityManager,int $id): Response
-    {
-        $recette = $entityManager->getRepository(Recette::class)->find($id);
-       // dd($recette);
-        return $this->render('recette/detail.html.twig', [
-            'controller_name' => 'RecetteController',
-            'recette'=>$recette
-        ]);
-    }
+
 
     #[Route('/unfav/{id}', name: 'recetteunfav')]
     public function unfavr(EntityManagerInterface $entityManager,int $id): Response
@@ -55,9 +62,15 @@ class RecetteController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
         }
-        return $this->render('recette/detail.html.twig', [
-            'controller_name' => 'RecetteController',
-            'recette'=>$recette
+        $user = $this->getUser();
+        if ($user != null){
+            return $this->render('recette/favoris.html.twig', [
+                'controller_name' => 'RecetteController',
+                'recettes'=>$user->getFavoris()
+            ]);
+        }
+        return $this->render('recette/favoris.html.twig', [
+            'controller_name' => 'RecetteController'
         ]);
     }
 
@@ -75,9 +88,15 @@ class RecetteController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->render('recette/detail.html.twig', [
-            'controller_name' => 'RecetteController',
-            'recette' => $recette
+        $user = $this->getUser();
+        if ($user != null){
+            return $this->render('recette/favoris.html.twig', [
+                'controller_name' => 'RecetteController',
+                'recettes'=>$user->getFavoris()
+            ]);
+        }
+        return $this->render('recette/favoris.html.twig', [
+            'controller_name' => 'RecetteController'
         ]);
     }
 

@@ -16,7 +16,7 @@ class Etape
     private $id;
 
     #[ORM\Column(type: 'integer')]
-    private $etape_index;
+    public $etape_index;
 
     #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'etapes')]
     private $ingredients;

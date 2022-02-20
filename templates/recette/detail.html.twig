@@ -7,16 +7,24 @@
         <h1 id="titre">
             {{ recette.titre }}
         </h1>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% if  recette in app.user.favoris %}
+                <a href="/unfav/{{ recette.id }}">Retirer cette recette des favoris</a>
+            {% else  %}
+                <a href="/fav/{{ recette.id }}">Ajouter cette recette aux favoris</a>
+            {% endif %}
+        {% else  %}
+            Pour ajouter des favoris,logez vous
+        {% endif %}
+        <br>
         <div id="etapes_container">
             {% for etape in recette.etapes %}
                <div class="etape_container">
-                   <p class="index">etape {{ etape.id }}    </p><p>   <em>  </em> {{ etape.getCompletedString }}</p>
+                   <p class="index">etape {{ etape.etape_index }}    </p><p>   <em>  </em> {{ etape.getCompletedString }}</p>
                </div>
             {% endfor %}
+            <h2>Servez bien chaud et dégustez en famille !</h2>
         </div>
-
-
-
     </div>
 
     <style>

@@ -21,7 +21,9 @@
             <a href="/favoris">Mes favoris</a>
         </div>
     </div>
-
+    <div id="RandomButton">
+        <a href="/rand">Random recette</a>
+    </div>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <div id="curent_account"> <p>Email: {{ app.user.email }}</p> <p><a href="/logout" id="logoutButton">Logout</a></p></div>
     {% else %}
@@ -33,6 +35,17 @@
 </body>
 <footer>Cet espace publicitaire a été sponsorisé par le gang anti-footer</footer>
 <style>
+    #RandomButton{
+
+        font-size: 28px;
+
+        height: 100%;
+        margin-left: 60px;
+        vertical-align: top;
+        margin-top: 15px;
+        border-radius: 12px;
+        background-color: #DDDDDD;
+    }
     #menu{
         font-size: 18px ;
         padding-left: 5px;
